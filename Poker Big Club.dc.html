@@ -1857,6 +1857,22 @@ class Component extends DCLogic {
     salaryMsg: null,
   };
 
+  async autoLoadFromJsonbin() {
+    const id = this.state.jsonbinId, key = this.state.jsonbinKey;
+    if (!id || !key) return;
+    // only auto-load if no session data exists locally
+    const hasLocal = localStorage.getItem('pbc_players') || localStorage.getItem('pbc_session') || localStorage.getItem('pbc_debts');
+    if (hasLocal) return;
+    try {
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${id}`, {
+        headers:{'X-Master-Key':key, 'X-Bin-Meta':'false'}
+      });
+      if (!res.ok) return;
+      const json = await res.json();
+      this.applyBackupData(json.record || json);
+    } catch(e) {}
+  }
+
   componentDidMount() {
     const db = JSON.parse(localStorage.getItem('pbc_players') || 'null');
     const dealerDB = JSON.parse(localStorage.getItem('pbc_dealers') || 'null');
@@ -1880,7 +1896,7 @@ class Component extends DCLogic {
       ...(fin || {}),
       ...(expenses ? {rakeRows:expenses.rakeRows||[], staffRows:expenses.staffRows||[], bonusRows:expenses.bonusRows||[], rent:expenses.rent||0} : {}),
       buyInAmt: (rates && rates.defaultBuyIn) || 500,
-    });
+    }, ()=>this.autoLoadFromJsonbin());
   }
 
   // ── StorageManager ──────────────────────────────────────────
@@ -2077,8 +2093,8 @@ class Component extends DCLogic {
     if (!id || !key) { this.setState({jsonbinMsg:'⚠️ הכנס Bin ID ו-API Key', jsonbinMsgCl:'#e84545'}); return; }
     this.setState({jsonbinMsg:'טוען...', jsonbinMsgCl:'#5a6b9a'});
     try {
-      const res = await fetch(`https://api.jsonbin.io/v3/b/${id}/latest`, {
-        headers:{'X-Master-Key':key}
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${id}`, {
+        headers:{'X-Master-Key':key, 'X-Bin-Meta':false}
       });
       if (!res.ok) throw new Error(res.status);
       const json = await res.json();
