@@ -1560,6 +1560,32 @@ input,select,textarea,button{font-family:'Heebo',sans-serif;}
     </div>
   </div>
 
+  <!-- JSONBin.io Cloud Sync -->
+  <div style="background:{{s1}};border:1px solid {{bd}};border-radius:14px;padding:24px;margin-bottom:18px;">
+    <h3 style="font-size:15px;font-weight:800;margin-bottom:6px;">☁️ JSONBin.io — סנכרון ענן</h3>
+    <p style="font-size:12px;color:{{ts}};margin-bottom:16px;">שמור וטען נתונים מ-JSONBin.io. צור חשבון חינמי ב-<strong style="color:{{ac}};">jsonbin.io</strong>, צור Bin חדש, והכנס את הפרטים כאן.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div>
+        <div style="font-size:12px;color:{{ts}};margin-bottom:6px;font-weight:600;">Bin ID</div>
+        <input type="text" value="{{jsonbinId}}" onChange="{{onJsonbinId}}" placeholder="6507f1234abc..."
+          style="width:100%;background:{{s2}};border:1px solid {{bd}};border-radius:9px;padding:10px 14px;color:{{tx}};font-size:13px;outline:none;" />
+      </div>
+      <div>
+        <div style="font-size:12px;color:{{ts}};margin-bottom:6px;font-weight:600;">API Key (X-Master-Key)</div>
+        <input type="password" value="{{jsonbinKey}}" onChange="{{onJsonbinKey}}" placeholder="$2a$10$..."
+          style="width:100%;background:{{s2}};border:1px solid {{bd}};border-radius:9px;padding:10px 14px;color:{{tx}};font-size:13px;outline:none;" />
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button onClick="{{jsonbinSave}}" style="background:{{ac}};color:#000;border:none;border-radius:9px;padding:10px 22px;cursor:pointer;font-size:13px;font-weight:800;">☁️ שמור לענן</button>
+      <button onClick="{{jsonbinLoad}}" style="background:none;border:1px solid {{bd}};border-radius:9px;padding:10px 22px;cursor:pointer;font-size:13px;font-weight:600;color:{{tx}};">📥 טען מהענן</button>
+      <button onClick="{{jsonbinSaveSettings}}" style="background:none;border:1px solid {{ac}}44;border-radius:9px;padding:10px 18px;cursor:pointer;font-size:12px;color:{{ac}};">💾 שמור הגדרות Bin</button>
+      <sc-if value="{{jsonbinMsg}}" hint-placeholder-val="{{ false }}">
+        <span style="font-size:13px;font-weight:700;color:{{jsonbinMsgCl}};">{{jsonbinMsg}}</span>
+      </sc-if>
+    </div>
+  </div>
+
   <!-- Reset -->
   <div style="background:{{rd}}0d;border:1px solid {{rd}}33;border-radius:14px;padding:24px;">
     <h3 style="font-size:15px;font-weight:800;margin-bottom:6px;color:{{rd}};">⚠️ איפוס נתונים</h3>
@@ -1796,6 +1822,12 @@ class Component extends DCLogic {
     editingVal: '',
     savedMsg: false,
 
+    // JSONBin settings
+    jsonbinId: localStorage.getItem('pbc_jsonbin_id')||'686ffb898960c979a5a99e84',
+    jsonbinKey: localStorage.getItem('pbc_jsonbin_key')||'$2a$10$4bDHddXMliiHOGRI5ElIZu6B1eIC7V5.dZuiVeO7189hxOLmlGme2',
+    jsonbinMsg: '',
+    jsonbinMsgCl: '',
+
     // storage settings
     storageMode: 'local',
     sbUrl: '',
@@ -2022,6 +2054,68 @@ class Component extends DCLogic {
       closingPlayer: null,
       view: 'dash',
     });
+  }
+
+  async jsonbinSave() {
+    const id = this.state.jsonbinId, key = this.state.jsonbinKey;
+    if (!id || !key) { this.setState({jsonbinMsg:'⚠️ הכנס Bin ID ו-API Key', jsonbinMsgCl:'#e84545'}); return; }
+    this.setState({jsonbinMsg:'שומר...', jsonbinMsgCl:'#5a6b9a'});
+    try {
+      const data = this.buildBackupData();
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${id}`, {
+        method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':key},
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error(res.status);
+      this.setState({jsonbinMsg:'✅ נשמר בהצלחה!', jsonbinMsgCl:'#34c97e'});
+      setTimeout(()=>this.setState({jsonbinMsg:''}), 3000);
+    } catch(e) { this.setState({jsonbinMsg:'❌ שגיאה: '+e.message, jsonbinMsgCl:'#e84545'}); }
+  }
+
+  async jsonbinLoad() {
+    const id = this.state.jsonbinId, key = this.state.jsonbinKey;
+    if (!id || !key) { this.setState({jsonbinMsg:'⚠️ הכנס Bin ID ו-API Key', jsonbinMsgCl:'#e84545'}); return; }
+    this.setState({jsonbinMsg:'טוען...', jsonbinMsgCl:'#5a6b9a'});
+    try {
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${id}/latest`, {
+        headers:{'X-Master-Key':key}
+      });
+      if (!res.ok) throw new Error(res.status);
+      const json = await res.json();
+      this.applyBackupData(json.record || json);
+      this.setState({jsonbinMsg:'✅ נטען בהצלחה!', jsonbinMsgCl:'#34c97e'});
+      setTimeout(()=>this.setState({jsonbinMsg:''}), 3000);
+    } catch(e) { this.setState({jsonbinMsg:'❌ שגיאה: '+e.message, jsonbinMsgCl:'#e84545'}); }
+  }
+
+  buildBackupData() {
+    return {
+      exportDate: new Date().toISOString(),
+      players: this.state.playerDB, dealers: this.state.dealerDB,
+      session: this.state.sessionPlayers,
+      financials: {mainCash:this.state.mainCash, smallCash:this.state.smallCash, bankAccount:this.state.bankAccount, creditMachine:this.state.creditMachine},
+      rates: {rateDealer:this.state.rateDealer, rateTournDealer:this.state.rateTournDealer, rateWaitress:this.state.rateWaitress, rateCook:this.state.rateCook, cashHaluka:this.state.cashHaluka, minCashHours:this.state.minCashHours, defaultBuyIn:this.state.defaultBuyIn},
+      tournament: {teData:this.state.teData, tkData:this.state.tkData, tfData:this.state.tfData, toData:this.state.toData, tournDate:this.state.tournDate, tournCashIncome:this.state.tournCashIncome, tournNotes:this.state.tournNotes},
+      expenses: {rakeRows:this.state.rakeRows, staffRows:this.state.staffRows, bonusRows:this.state.bonusRows, rent:this.state.rent},
+      debts: this.DR, debtHist: this.DR_HIST,
+      receipts: this.RCPTS, dealerRows: this.state.dealerRows,
+    };
+  }
+
+  applyBackupData(data) {
+    const newState = {};
+    if (data.players)    { newState.playerDB = data.players; localStorage.setItem('pbc_players', JSON.stringify(data.players)); }
+    if (data.dealers)    { newState.dealerDB = data.dealers; localStorage.setItem('pbc_dealers', JSON.stringify(data.dealers)); }
+    if (data.session)    { newState.sessionPlayers = data.session; localStorage.setItem('pbc_session', JSON.stringify(data.session)); }
+    if (data.financials) { Object.assign(newState, data.financials); localStorage.setItem('pbc_financials', JSON.stringify(data.financials)); }
+    if (data.rates)      { Object.assign(newState, data.rates); localStorage.setItem('pbc_rates', JSON.stringify(data.rates)); }
+    if (data.tournament) { Object.assign(newState, data.tournament); localStorage.setItem('pbc_tourn', JSON.stringify(data.tournament)); }
+    if (data.expenses)   { Object.assign(newState, data.expenses); localStorage.setItem('pbc_expenses', JSON.stringify(data.expenses)); }
+    if (data.debts)      { this.DR = data.debts; this.saveDR(); }
+    if (data.debtHist)   { this.DR_HIST = data.debtHist; localStorage.setItem('pbc_debt_hist', JSON.stringify(data.debtHist)); }
+    if (data.receipts)   { this.RCPTS = data.receipts; }
+    if (data.dealerRows) { newState.dealerRows = data.dealerRows; }
+    this.setState(newState);
   }
 
   backupJSON() {
@@ -3389,6 +3483,22 @@ class Component extends DCLogic {
       backupJSON:  ()=>this.backupJSON(),
       restoreJSON: (e)=>this.restoreJSON(e),
       resetAllData: ()=>this.resetAllData(),
+
+      // JSONBin
+      jsonbinId: this.state.jsonbinId,
+      jsonbinKey: this.state.jsonbinKey,
+      jsonbinMsg: this.state.jsonbinMsg,
+      jsonbinMsgCl: this.state.jsonbinMsgCl,
+      onJsonbinId:  (e)=>this.setState({jsonbinId:e.target.value}),
+      onJsonbinKey: (e)=>this.setState({jsonbinKey:e.target.value}),
+      jsonbinSave: ()=>this.jsonbinSave(),
+      jsonbinLoad: ()=>this.jsonbinLoad(),
+      jsonbinSaveSettings: ()=>{
+        localStorage.setItem('pbc_jsonbin_id',  this.state.jsonbinId);
+        localStorage.setItem('pbc_jsonbin_key', this.state.jsonbinKey);
+        this.setState({jsonbinMsg:'✅ הגדרות נשמרו', jsonbinMsgCl:'#34c97e'});
+        setTimeout(()=>this.setState({jsonbinMsg:''}), 2000);
+      },
       // Tournament
       tournDate: this.state.tournDate,
       onTournDate: (e)=>this.setState({tournDate:e.target.value}),

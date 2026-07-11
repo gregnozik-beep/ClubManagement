@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+doc-page:not(:defined){visibility:hidden}
+</style>
+<script src="doc-page.js"></script>
+</helmet>
+
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" hint-size="100%,100%">
+<doc-page size="a4" margin="18mm">
+
+  <!-- HEADER slot -->
+  <div slot="header" style="display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:2px solid #1a2040;font-family:'Heebo',sans-serif;">
+    <span style="font-size:11px;color:#666;font-weight:500;letter-spacing:0.3px;">הצעת מחיר — מערכת ניהול מועדון פוקר</span>
+    <span style="font-size:13px;font-weight:800;color:#1a2040;">♠ Poker Big Club</span>
+  </div>
+
+  <!-- COVER SECTION -->
+  <div style="margin-bottom:36px;padding:36px 0 32px;border-bottom:3px solid #1a2040;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;">
+      <div>
+        <div style="font-family:'Heebo',sans-serif;font-size:11px;font-weight:700;color:#c9a227;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">הצעת מחיר · יולי 2026</div>
+        <h1 style="font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:#1a2040;line-height:1.1;margin:0 0 12px;">מערכת ניהול<br>מועדון פוקר</h1>
+        <p style="font-family:'Heebo',sans-serif;font-size:15px;color:#555;line-height:1.6;max-width:420px;margin:0;">פתרון דיגיטלי מקיף לניהול קאש, טורנירים, חובות שחקנים וכספים — הכל במקום אחד.</p>
+      </div>
+      <div style="text-align:center;background:#1a2040;border-radius:16px;padding:24px 28px;color:#fff;min-width:150px;">
+        <div style="font-family:'Heebo',sans-serif;font-size:48px;line-height:1;margin-bottom:4px;">♠</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:18px;font-weight:800;color:#c9a227;">Poker Big</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:11px;color:#aab;">Club Management</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+      <div style="background:#f8f9fc;border:1px solid #e0e5f0;border-radius:10px;padding:14px;text-align:center;border-top:3px solid #c9a227;">
+        <div style="font-family:'Heebo',sans-serif;font-size:24px;font-weight:900;color:#1a2040;">6</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;margin-top:3px;">מודולים</div>
+      </div>
+      <div style="background:#f8f9fc;border:1px solid #e0e5f0;border-radius:10px;padding:14px;text-align:center;border-top:3px solid #2e8b5a;">
+        <div style="font-family:'Heebo',sans-serif;font-size:24px;font-weight:900;color:#1a2040;">62+</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;margin-top:3px;">שחקנים</div>
+      </div>
+      <div style="background:#f8f9fc;border:1px solid #e0e5f0;border-radius:10px;padding:14px;text-align:center;border-top:3px solid #3b6fd4;">
+        <div style="font-family:'Heebo',sans-serif;font-size:24px;font-weight:900;color:#1a2040;">Excel</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;margin-top:3px;">ייצוא מובנה</div>
+      </div>
+      <div style="background:#f8f9fc;border:1px solid #e0e5f0;border-radius:10px;padding:14px;text-align:center;border-top:3px solid #e04d4d;">
+        <div style="font-family:'Heebo',sans-serif;font-size:24px;font-weight:900;color:#1a2040;">∞</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;margin-top:3px;">סשנים</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div style="margin-bottom:32px;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1a2040;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #e0e5f0;">האתגר הנוכחי</h2>
+    <p style="font-family:'Heebo',sans-serif;font-size:14px;color:#444;line-height:1.7;margin:0 0 14px;">כיום ניהול המועדון מתבצע בקבצי Excel נפרדים — אחד לקאש, אחד לטורנירים, ואחד לחובות. הגישה הזו יוצרת מספר בעיות מרכזיות:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="background:#fff5f5;border:1px solid #fdd;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px;flex-shrink:0;">⚠️</span>
+        <div>
+          <div style="font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;color:#c03030;margin-bottom:4px;">פיזור מידע</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.5;">שלושה קבצים נפרדים — קשה לקבל תמונה כוללת של מצב המועדון.</div>
+        </div>
+      </div>
+      <div style="background:#fff5f5;border:1px solid #fdd;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px;flex-shrink:0;">🐌</span>
+        <div>
+          <div style="font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;color:#c03030;margin-bottom:4px;">עבודה איטית</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.5;">רישום כניסות ידני, חישובים בפורמולות, עדכון חובות בנפרד.</div>
+        </div>
+      </div>
+      <div style="background:#fff5f5;border:1px solid #fdd;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px;flex-shrink:0;">❌</span>
+        <div>
+          <div style="font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;color:#c03030;margin-bottom:4px;">שגיאות אנוש</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.5;">פורמולות שבורות, טעויות בהעתקה, חוסר עקביות בין קבצים.</div>
+        </div>
+      </div>
+      <div style="background:#fff5f5;border:1px solid #fdd;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px;flex-shrink:0;">📵</span>
+        <div>
+          <div style="font-family:'Heebo',sans-serif;font-size:13px;font-weight:700;color:#c03030;margin-bottom:4px;">אין היסטוריה</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.5;">קשה לעקוב אחרי מגמות, לנתח ביצועים, או למצוא נתון ישן.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE SOLUTION -->
+  <div style="margin-bottom:32px;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1a2040;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #e0e5f0;">הפתרון המוצע</h2>
+    <p style="font-family:'Heebo',sans-serif;font-size:14px;color:#444;line-height:1.7;margin:0 0 18px;">אפליקציית ניהול web מקצועית, עברית RTL, הפועלת ישירות בדפדפן — ללא התקנה, ללא שרת, ללא עלויות חודשיות. כל הנתונים שלכם נשמרים אוטומטית.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+      <div style="border:1px solid #e0e5f0;border-radius:12px;padding:18px;border-top:3px solid #c9a227;">
+        <div style="font-size:24px;margin-bottom:10px;">🃏</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:6px;">ניהול קאש</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#555;line-height:1.6;">מעקב חי אחרי כל Buy-In בזמן אמת. הוספת שחקנים תוך שניות. חישוב אוטומטי של רווח הבית.</div>
+      </div>
+      <div style="border:1px solid #e0e5f0;border-radius:12px;padding:18px;border-top:3px solid #2e8b5a;">
+        <div style="font-size:24px;margin-bottom:10px;">🏆</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:6px;">ניהול טורנירים</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#555;line-height:1.6;">כניסות, ריביי, אד-און. שכר צוות מטבח ואולם. חישוב אוטומטי של רווח נקי.</div>
+      </div>
+      <div style="border:1px solid #e0e5f0;border-radius:12px;padding:18px;border-top:3px solid #e04d4d;">
+        <div style="font-size:24px;margin-bottom:10px;">💳</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:6px;">חובות שחקנים</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#555;line-height:1.6;">רשימה מלאה של 62+ שחקנים. עדכון מהיר, חיפוש, ניהול קופות וחשבון בנק.</div>
+      </div>
+      <div style="border:1px solid #e0e5f0;border-radius:12px;padding:18px;border-top:3px solid #3b6fd4;">
+        <div style="font-size:24px;margin-bottom:10px;">📊</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:6px;">לוח בקרה</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#555;line-height:1.6;">תמונה כוללת של המועדון — קופות, חובות, רווחים אחרונים, כל הנתונים במקום אחד.</div>
+      </div>
+      <div style="border:1px solid #e0e5f0;border-radius:12px;padding:18px;border-top:3px solid #9a44f5;">
+        <div style="font-size:24px;margin-bottom:10px;">📋</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:6px;">היסטוריה מלאה</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#555;line-height:1.6;">כל הסשנים והטורנירים שמורים. חיפוש, סינון, ניתוח ביצועים לאורך זמן.</div>
+      </div>
+      <div style="border:1px solid #e0e5f0;border-radius:12px;padding:18px;border-top:3px solid #f0c040;">
+        <div style="font-size:24px;margin-bottom:10px;">📥</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:6px;">ייצוא Excel</div>
+        <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#555;line-height:1.6;">כל מסך ניתן לייצוא לקובץ Excel במקליק. פורמט זהה לקבצים הנוכחיים שלכם.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECH DETAILS -->
+  <div style="margin-bottom:32px;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1a2040;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #e0e5f0;">פרטים טכניים</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        <table style="width:100%;border-collapse:collapse;font-family:'Heebo',sans-serif;font-size:13px;">
+          <thead>
+            <tr style="background:#1a2040;color:#fff;">
+              <th style="padding:10px 14px;text-align:right;font-weight:700;border-radius:8px 0 0 0;">פריט</th>
+              <th style="padding:10px 14px;text-align:right;font-weight:700;border-radius:0 8px 0 0;">פרטים</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #e8ecf4;">
+              <td style="padding:10px 14px;font-weight:600;color:#333;">פלטפורמה</td>
+              <td style="padding:10px 14px;color:#555;">Web — כל דפדפן מודרני</td>
+            </tr>
+            <tr style="background:#f8f9fc;border-bottom:1px solid #e8ecf4;">
+              <td style="padding:10px 14px;font-weight:600;color:#333;">התקנה</td>
+              <td style="padding:10px 14px;color:#555;">אין — קובץ HTML אחד</td>
+            </tr>
+            <tr style="border-bottom:1px solid #e8ecf4;">
+              <td style="padding:10px 14px;font-weight:600;color:#333;">שרת</td>
+              <td style="padding:10px 14px;color:#555;">לא נדרש (אופציונלי)</td>
+            </tr>
+            <tr style="background:#f8f9fc;border-bottom:1px solid #e8ecf4;">
+              <td style="padding:10px 14px;font-weight:600;color:#333;">גיבוי נתונים</td>
+              <td style="padding:10px 14px;color:#555;">localStorage + ייצוא JSON</td>
+            </tr>
+            <tr style="border-bottom:1px solid #e8ecf4;">
+              <td style="padding:10px 14px;font-weight:600;color:#333;">שפה</td>
+              <td style="padding:10px 14px;color:#555;">עברית RTL מלאה</td>
+            </tr>
+            <tr style="background:#f8f9fc;">
+              <td style="padding:10px 14px;font-weight:600;color:#333;">ייבוא נתונים</td>
+              <td style="padding:10px 14px;color:#555;">מקבצי Excel קיימים</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#f0fff6;border:1px solid #b8e6ce;border-radius:10px;padding:14px 16px;">
+          <div style="font-family:'Heebo',sans-serif;font-size:13px;font-weight:800;color:#1a6640;margin-bottom:6px;">✅ יתרונות מרכזיים</div>
+          <ul style="font-family:'Heebo',sans-serif;font-size:12px;color:#333;line-height:1.8;margin:0;padding-right:16px;">
+            <li>עובד offline — ללא תלות באינטרנט</li>
+            <li>מהיר וקל לשימוש על מחשב נייד</li>
+            <li>ערכת נושא כהה ובהירה</li>
+            <li>כל הנתונים מהקבצים הנוכחיים מיובאים</li>
+            <li>ניתן להרחבה עתידית</li>
+          </ul>
+        </div>
+        <div style="background:#fffbf0;border:1px solid #f0dfa0;border-radius:10px;padding:14px 16px;">
+          <div style="font-family:'Heebo',sans-serif;font-size:13px;font-weight:800;color:#8a6000;margin-bottom:6px;">🔮 אפשרויות עתידיות</div>
+          <ul style="font-family:'Heebo',sans-serif;font-size:12px;color:#333;line-height:1.8;margin:0;padding-right:16px;">
+            <li>גישה מרובת משתמשים דרך שרת</li>
+            <li>סנכרון בין מכשירים</li>
+            <li>דוחות וגרפים</li>
+            <li>אפליקציית מובייל</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELIVERABLES & TIMELINE -->
+  <div style="margin-bottom:32px;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1a2040;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #e0e5f0;">היקף העבודה ולוח זמנים</h2>
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div style="display:grid;grid-template-columns:28px 1fr;gap:0 16px;align-items:stretch;">
+
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#c9a227;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Heebo',sans-serif;font-size:12px;font-weight:800;flex-shrink:0;">1</div>
+          <div style="width:2px;background:#e0e5f0;flex:1;margin:4px 0;"></div>
+        </div>
+        <div style="padding-bottom:20px;">
+          <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:4px;">מסך ניהול קאש</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.6;">Buy-In חי, טבלת שחקנים, סגירת סשן, ייצוא Excel. כולל ייבוא נתוני 04.07.26.</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#2e8b5a;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Heebo',sans-serif;font-size:12px;font-weight:800;flex-shrink:0;">2</div>
+          <div style="width:2px;background:#e0e5f0;flex:1;margin:4px 0;"></div>
+        </div>
+        <div style="padding-bottom:20px;">
+          <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:4px;">מסך ניהול טורנירים</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.6;">הזנת כניסות, שכר צוות, הוצאות, חישוב אוטומטי. ייבוא נתוני 04.07.26.</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#3b6fd4;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Heebo',sans-serif;font-size:12px;font-weight:800;flex-shrink:0;">3</div>
+          <div style="width:2px;background:#e0e5f0;flex:1;margin:4px 0;"></div>
+        </div>
+        <div style="padding-bottom:20px;">
+          <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:4px;">מסך חובות שחקנים</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.6;">ניהול 62+ שחקנים, עדכון חובות, קופות, בנק, סליקה. ייבוא כל נתוני יולי 2026.</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#9a44f5;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Heebo',sans-serif;font-size:12px;font-weight:800;flex-shrink:0;">4</div>
+          <div style="width:2px;background:#e0e5f0;flex:1;margin:4px 0;"></div>
+        </div>
+        <div style="padding-bottom:20px;">
+          <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:4px;">לוח בקרה, היסטוריה ושחקנים</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.6;">דשבורד ראשי עם מדדים, היסטוריה מלאה, ניהול מאגר שחקנים.</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          <div style="width:28px;height:28px;border-radius:50%;background:#1a2040;display:flex;align-items:center;justify-content:center;color:#c9a227;font-family:'Heebo',sans-serif;font-size:12px;font-weight:800;flex-shrink:0;">5</div>
+          <div style="width:2px;background:transparent;flex:1;"></div>
+        </div>
+        <div style="padding-bottom:0;">
+          <div style="font-family:'Heebo',sans-serif;font-size:14px;font-weight:800;color:#1a2040;margin-bottom:4px;">ייצוא Excel + גיבוי ומסירה</div>
+          <div style="font-family:'Heebo',sans-serif;font-size:12px;color:#666;line-height:1.6;">ייצוא Excel לכל מסך, גיבוי/שחזור נתונים, הדרכה קצרה, קובץ HTML מוכן לשימוש.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREENS GALLERY -->
+  <div style="margin-bottom:32px;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1a2040;margin:0 0 6px;padding-bottom:8px;border-bottom:1px solid #e0e5f0;">מסכי המערכת</h2>
+    <p style="font-family:'Heebo',sans-serif;font-size:13px;color:#666;margin:0 0 18px;">תצוגה מקדימה אמיתית של כל מסכי האפליקציה</p>
+
+    <!-- Row 1: Dashboard + Cash -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div style="border:1px solid #e0e5f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#1a2040;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#c9a227;">🏠</span>
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#fff;">לוח בקרה</span>
+        </div>
+        <img src="screenshots/01-screens.png" style="width:100%;display:block;" />
+      </div>
+      <div style="border:1px solid #e0e5f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#1a2040;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#34c97e;">🃏</span>
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#fff;">ניהול קאש — סשן פעיל</span>
+        </div>
+        <img src="screenshots/02-screens.png" style="width:100%;display:block;" />
+      </div>
+    </div>
+
+    <!-- Row 2: Tournament + Debts -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <div style="border:1px solid #e0e5f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#1a2040;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#d4af37;">🏆</span>
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#fff;">ניהול טורניר</span>
+        </div>
+        <img src="screenshots/03-screens.png" style="width:100%;display:block;" />
+      </div>
+      <div style="border:1px solid #e0e5f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#1a2040;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#e84545;">💳</span>
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#fff;">חובות שחקנים</span>
+        </div>
+        <img src="screenshots/04-screens.png" style="width:100%;display:block;" />
+      </div>
+    </div>
+
+    <!-- Row 3: History + Players -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="border:1px solid #e0e5f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#1a2040;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#9a44f5;">📋</span>
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#fff;">היסטוריה</span>
+        </div>
+        <img src="screenshots/05-screens.png" style="width:100%;display:block;" />
+      </div>
+      <div style="border:1px solid #e0e5f0;border-radius:12px;overflow:hidden;">
+        <div style="background:#1a2040;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#4a7cf5;">👥</span>
+          <span style="font-family:'Heebo',sans-serif;font-size:12px;font-weight:700;color:#fff;">שחקנים</span>
+        </div>
+        <img src="screenshots/06-screens.png" style="width:100%;display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER CTA -->
+  <div style="background:#1a2040;border-radius:14px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;">מוכנים להתחיל?</div>
+      <div style="font-family:'Heebo',sans-serif;font-size:13px;color:#aab;line-height:1.6;">הצעה זו תקפה ל-30 יום · אפשרות לפיתוח בשלבים</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-family:'Heebo',sans-serif;font-size:11px;color:#c9a227;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">זמן אספקה משוער</div>
+      <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#fff;line-height:1;">5–7 ימי עבודה</div>
+    </div>
+  </div>
+
+</doc-page>
+</x-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>
